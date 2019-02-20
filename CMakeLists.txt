@@ -112,7 +112,6 @@ endif ()
 
 if (BUILD_JPEG)
     add_subdirectory(libjpeg)
-    INSTALL_HEADERS(libjpeg)
 endif ()
 
 # JSONCPP
@@ -138,7 +137,6 @@ else ()
 
     if (BUILD_JSONCPP)
         add_subdirectory(jsoncpp)
-        INSTALL_HEADERS(jsoncpp)
     endif ()
 endif ()
 
@@ -159,8 +157,6 @@ endif ()
 if (BUILD_PNG)
     add_subdirectory(zlib)
     add_subdirectory(libpng)
-    INSTALL_HEADERS(zlib)
-    INSTALL_HEADERS(libpng)
     list(APPEND PNG_LIBRARIES zlib)
 endif ()
 
@@ -186,7 +182,6 @@ if (BUILD_LIBREALSENSE)
     message(STATUS "Building LIBREALSENSE from source")
     add_subdirectory(librealsense)
     Directories("${CMAKE_CURRENT_SOURCE_DIR}/librealsense" librealsense_INCLUDE_DIRS)
-    INSTALL_HEADERS(librealsense)
 endif ()
 
 # tinyfiledialogs
@@ -195,7 +190,6 @@ if (BUILD_TINYFILEDIALOGS)
     add_subdirectory(tinyfiledialogs)
     set(tinyfiledialogs_INCLUDE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/tinyfiledialogs")
     set(tinyfiledialogs_LIBRARIES tinyfiledialogs)
-    INSTALL_HEADERS(tinyfiledialogs)
 else ()
     message(SEND_ERROR "TINYFILEDIALOGS dependency not met.")
 endif ()
@@ -218,6 +212,15 @@ list(APPEND 3RDPARTY_INCLUDE_DIRS
      ${PNG_INCLUDE_DIRS}
      ${rply_INCLUDE_DIRS}
      ${tinyfiledialogs_INCLUDE_DIRS})
+
+# set 3RDPARTY_INCLUDE_DIRS_AT_INSTALL
+# Open3D's header only dependes on Eigen and GL headers
+# The future plan is to minimize such dependencies
+list(APPEND 3RDPARTY_INCLUDE_DIRS_AT_INSTALL
+     ${EIGEN3_INCLUDE_DIRS}
+     ${GLEW_INCLUDE_DIRS}
+     ${GLFW_INCLUDE_DIRS}
+)
 
 # set 3RDPARTY_LIBRARY_DIRS
 list(APPEND 3RDPARTY_LIBRARY_DIRS
@@ -260,6 +263,7 @@ if (NOT BUILD_TINYFILEDIALOGS)
 endif ()
 
 set(3RDPARTY_INCLUDE_DIRS ${3RDPARTY_INCLUDE_DIRS} PARENT_SCOPE)
+set(3RDPARTY_INCLUDE_DIRS_AT_INSTALL ${3RDPARTY_INCLUDE_DIRS_AT_INSTALL} PARENT_SCOPE)
 set(3RDPARTY_LIBRARY_DIRS ${3RDPARTY_LIBRARY_DIRS} PARENT_SCOPE)
 set(3RDPARTY_LIBRARIES    ${3RDPARTY_LIBRARIES}    PARENT_SCOPE)
 set(PRE_BUILT_3RDPARTY_LIBRARIES ${PRE_BUILT_3RDPARTY_LIBRARIES} PARENT_SCOPE)
