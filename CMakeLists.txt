@@ -194,6 +194,15 @@ else ()
     message(SEND_ERROR "TINYFILEDIALOGS dependency not met.")
 endif ()
 
+if (BUILD_UNIT_TESTS)
+    add_subdirectory(googletest)
+endif ()
+
+cmake_policy(SET CMP0048 NEW)
+add_subdirectory(googletest)
+set(GTEST_INCLUDE_DIR "${gtest_SOURCE_DIR}/include" PARENT_SCOPE)
+set(GTEST_LIBRARIES gtest_main PARENT_SCOPE)
+
 # rply
 Directories("${CMAKE_CURRENT_SOURCE_DIR}/rply"   rply_INCLUDE_DIRS)
 
@@ -211,7 +220,8 @@ list(APPEND 3RDPARTY_INCLUDE_DIRS
      ${librealsense_INCLUDE_DIRS}
      ${PNG_INCLUDE_DIRS}
      ${rply_INCLUDE_DIRS}
-     ${tinyfiledialogs_INCLUDE_DIRS})
+     ${tinyfiledialogs_INCLUDE_DIRS}
+)
 
 # set 3RDPARTY_INCLUDE_DIRS_AT_INSTALL
 # Open3D's header only dependes on Eigen and GL headers
@@ -237,7 +247,9 @@ list(APPEND 3RDPARTY_LIBRARIES
      ${JPEG_LIBRARIES}
      ${JSONCPP_LIBRARIES}
      ${PNG_LIBRARIES}
-     ${tinyfiledialogs_LIBRARIES})
+     ${tinyfiledialogs_LIBRARIES}
+     ${GTEST_LIBRARIES}
+)
 
 # set PRE_BUILT_3RDPARTY_LIBRARIES. When building Open3D as shared library,
 # the user app that links Open3D also need to link PRE_BUILT_3RDPARTY_LIBRARIES,
