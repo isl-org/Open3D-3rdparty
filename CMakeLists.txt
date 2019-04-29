@@ -143,6 +143,9 @@ endif ()
 # liblzf
 Directories("${CMAKE_CURRENT_SOURCE_DIR}/liblzf" liblzf_INCLUDE_DIRS)
 
+# tritriintersect
+Directories("${CMAKE_CURRENT_SOURCE_DIR}/tritriintersect" liblzf_INCLUDE_DIRS)
+
 # PNG
 if (BUILD_PNG)
     message(STATUS "Building LIBPNG from source (BUILD_PNG=ON)")
