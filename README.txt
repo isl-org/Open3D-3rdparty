@@ -61,6 +61,10 @@ tinyfiledialogs             2.7.2                                   zlib license
 A lightweight cross-platform file dialog library
 https://sourceforge.net/projects/tinyfiledialogs/
 --------------------------------------------------------------------------------
+qhull                       2015.2                                      BSD like
+Convex hull, Delauny triangulation, Voronoi diagram, halfspace intersection.
+http://www.qhull.org/
+--------------------------------------------------------------------------------
 pybind11                    2.2                                      BSD license
 Python binding for C++11
 https://github.com/pybind/pybind11
