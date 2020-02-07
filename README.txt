@@ -1,7 +1,7 @@
 This folder contains a set of external libraries that are used in Open3D.
 
 We want to make Open3D self-contained and cross-platformly consistent. So
-Open3DV does not detect system installed libraries and always link to these
+Open3D does not detect system installed libraries and always link to these
 external libraries.
 
 Some external libraries rely on basic system level libraries such as OpenGL and
