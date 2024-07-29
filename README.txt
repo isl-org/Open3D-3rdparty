@@ -1,3 +1,5 @@
+Moved to https://github.com/isl-org/Open3D
+
 This folder contains a set of external libraries that are used in Open3D.
 
 We want to make Open3D self-contained and cross-platformly consistent. So
